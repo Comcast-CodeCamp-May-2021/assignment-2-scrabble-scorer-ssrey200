@@ -3,7 +3,7 @@
 const input = require("readline-sync");
 
 const oldPointStructure = {
-  0: [' '], //THIS IS NEW
+  //0: [' '], //THIS IS NEW
   1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
   2: ['D', 'G'],
   3: ['B', 'C', 'M', 'P'],
@@ -69,6 +69,9 @@ function vowelBonusScore(word){
 };
 
 function scrabbleScore(word){
+  if (word.includes(' ')) {
+    word = word.split(' ').join('');
+  }
   word = word.toLowerCase();
   let letterPoints = 0;
   transform();
