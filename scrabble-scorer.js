@@ -95,7 +95,7 @@ function scorerPrompt() {
 1 - Vowel Bonus: Vowels are worth 3 points
 2 - Scrabble: Uses scrabble point system
 Enter 0, 1, or 2: `);
-  }
+
   let chosenAlgorithm = scoringAlgorithms[index];
   console.log(`Score for '${word}': ${chosenAlgorithm.scorerFunction(word)}`);
   return chosenAlgorithm;
