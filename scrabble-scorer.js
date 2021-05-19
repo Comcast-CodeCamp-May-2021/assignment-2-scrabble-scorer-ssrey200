@@ -34,10 +34,6 @@ let word = "";
 function initialPrompt() {
   word = input.question("Let's play some scrabble! Enter a word: ");
   word = word.toLowerCase();
-  //let test = scorerPrompt();
-  //console.log(test.scorerFunction(word));
-  //console.log(chosenAlgorithm(word));
-  //return word.toUpperCase();
 };
 
 function simpleScore(word){
@@ -73,17 +69,17 @@ let scoringAlgorithms = [
   {
     name: "Simple Score",
     description: "Each letter is worth 1 point",
-    scorerFunction: simpleScore
+    scoringFunction: simpleScore
   },
   {
     name: "Bonus Vowels",
     description: "Vowels are 3 pts, consonants are 1 pt.",
-    scorerFunction: vowelBonusScore
+    scoringFunction: vowelBonusScore
   },
   {
     name: "Scrabble",
     description: "The traditional scoring algorithm.",
-    scorerFunction: scrabbleScore
+    scoringFunction: scrabbleScore
   }];
 
 
@@ -97,7 +93,7 @@ function scorerPrompt() {
 Enter 0, 1, or 2: `);
 
   let chosenAlgorithm = scoringAlgorithms[index];
-  console.log(`Score for '${word}': ${chosenAlgorithm.scorerFunction(word)}`);
+  console.log(`Score for '${word}': ${chosenAlgorithm.scoringFunction(word)}`);
   return chosenAlgorithm;
 }
 
