@@ -122,16 +122,17 @@ Enter 0, 1, or 2: `));
 
 function transform(anObject = oldPointStructure) {
   let newPointStructure = {};
-  for (let key in oldPointStructure) {
-    for (let j = 0; j < oldPointStructure[key].length; j++){
-      let newKey = oldPointStructure[key][j].toLowerCase();
+  for (let key in anObject) {
+    for (let j = 0; j < anObject[key].length; j++){
+      let newKey = anObject[key][j].toLowerCase();
       newPointStructure[newKey] = Number(key);
     }
   }
+  //console.log(newPointStructure)
   return newPointStructure;
 };
 
-let newPointStructure = transform(oldPointStructure);
+let newPointStructure = transform();
 
 function runProgram() {
    console.clear();
