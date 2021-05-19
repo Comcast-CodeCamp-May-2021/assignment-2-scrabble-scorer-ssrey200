@@ -3,6 +3,7 @@
 const input = require("readline-sync");
 
 const oldPointStructure = {
+  0: [' '], //THIS IS NEW
   1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
   2: ['D', 'G'],
   3: ['B', 'C', 'M', 'P'],
@@ -30,13 +31,22 @@ function oldScrabbleScorer(word) {
 
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
-let word = "";
+let word = "@";
 function initialPrompt() {
-  word = input.question("Let's play some scrabble! Enter a word: ");
+  console.log("Let's play some scrabble!")
+  while (word.match(/[^A-Za-z\s+]/g)) {
+    word = input.question("Enter a word: ");
+    if (word.match(/[^A-Za-z\s+]/g)){
+      console.log("ERROR: Invalid Input");
+    }
+  }
   word = word.toLowerCase();
 };
 
 function simpleScore(word){
+  if (word.includes(' ')) {
+    word = word.split(' ').join('');
+  }
   return word.length;
 };
 
@@ -45,6 +55,9 @@ function vowelBonusScore(word){
   let letterPoints = 0;
  
 	for (let i = 0; i < word.length; i++) {
+    if (word.includes(' ')) {
+      word = word.split(' ').join('');
+    }
     if (oldPointStructure[1].includes(word[i]) && oldPointStructure[1].indexOf(word[i]) < 5) {
       letterPoints += 3;
     } else { 
@@ -85,13 +98,20 @@ let scoringAlgorithms = [
 
 function scorerPrompt() {
   let index;
-  index = input.question(`Which scoring algorithm would you like to use?
+  let indexArray = [0, 1, 2];
+  while (!(indexArray.includes(index))){
+  index = Number(input.question(`Which scoring algorithm would you like to use?
   
 0 - Simple: One point per character
 1 - Vowel Bonus: Vowels are worth 3 points
 2 - Scrabble: Uses scrabble point system
-Enter 0, 1, or 2: `);
-
+Enter 0, 1, or 2: `));
+    if (!(indexArray.includes(index))) {
+      console.log('\n---------------------------------')
+      console.log("ERROR: Invalid Input");
+      console.log('---------------------------------\n')
+    }
+  }
   let chosenAlgorithm = scoringAlgorithms[index];
   console.log(`Score for '${word}': ${chosenAlgorithm.scoringFunction(word)}`);
   return chosenAlgorithm;
